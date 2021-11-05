@@ -24,7 +24,7 @@ lista_temp = [0]
 indice_cliente = 0
 tiempo_periodo_temp = 0
 
-
+# Función para verificar si ya se agregaron todos los productos
 def verifyProducts():
     count = 0                    
     for i in range( len(lista_temp) ):
@@ -54,14 +54,7 @@ while( not flag ): # El ciclo dura n_nodos - 1 para así reservar el último pue
             else:
                 costo_min = matrizTiempos[indice_cliente][i] # Se guarda el valor del costo mínimo en la variable
                 i_costo_minimo = i 
-    # Fin del for para comparar cada cliente de la fila actual
-    #print(i_costo_minimo)
 
-    # # El número del cliente sería igual a su índice (matriz)
-    # lista_temp.append(i_costo_minimo) # Y ya se agrega el cliente con el menor costo a la lista del 
-    # # tour después de las validaciones
-    # indice_cliente = i_costo_minimo # Se guarda el índice del último cliente que se ha añadido para 
-    # # encontrar el nuevo cliente
 
     sumaTiempos = matrizTiempos[indice_cliente][i_costo_minimo] + productos[i_costo_minimo] + matrizTiempos[0][i_costo_minimo]
 
@@ -84,13 +77,39 @@ while( not flag ): # El ciclo dura n_nodos - 1 para así reservar el último pue
        
 
 ################## Fin - Generar Tour TSP ################## 
+
+
+lista_temp.pop(0)
+lista_temp.append(0)
+
+
+################## Inicio - Calcular Costo Total ################## 
+# Inicializar variable para el costo total
+costo_total = 0
+costo_total = costo_total + matrizTiempos[ 0 ][ lista_temp[0] ]
+# Para cada nodo se encuentra su costo con el nodo siguiente
+for nodo in range( len(lista_temp) ):
+    if (nodo == len(lista_temp) - 1): #Si es igual al último índice se sale del loop
+        break
+    # Se consulta la matriz de tiempos para obtener el costo total del 
+    # Tour TSP Final
+    costo_total = costo_total + matrizTiempos[ lista_temp[nodo] ][ lista_temp[nodo + 1] ]
+
+
+# Calcular cuántos mantenimientos hay en la lista
+countM = 0
+for nodo in range( len(lista_temp) ):
+    if( lista_temp[nodo] == 0 ):
+        countM = countM + 1
+
+costo_total = costo_total + (M * countM)
+
+costo_total = costo_total + sum(productos) - M
+
 print(lista_temp)
-
-
+#print(countM)
+print(costo_total)
 ################## Inicio - Calcular Costo Total ################## 
-
-################## Inicio - Calcular Costo Total ################## 
-
 
 
 
