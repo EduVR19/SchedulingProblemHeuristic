@@ -167,6 +167,8 @@ for i in range( len(productos ) ):
 
 
 
+
+################## Inicio - Generar Secuenciación de productos ################## 
 lista_final = []
 lista_temp = [0]
 indice_cliente = 0
@@ -186,7 +188,6 @@ def verifyProducts():
 
 flag = False
 
-################## Fin - Generar Tour TSP ################## 
 while( not flag ): # El ciclo dura n_nodos - 1 para así reservar el último puesto para el 
     # cliente inicial
     costo_min = max( matrizTiempos[indice_cliente] ) # Se encuentra el valor máximo de la fila
@@ -221,14 +222,12 @@ while( not flag ): # El ciclo dura n_nodos - 1 para así reservar el último pue
 
     flag = verifyProducts()
 # Fin del for para todos los nodos
-
-       
-
-################## Fin - Generar Tour TSP ################## 
-
-
 lista_temp.pop(0)
 lista_temp.append(0)
+################## Fin - Generar Secuenciación de productos ################## 
+
+
+
 
 
 ################## Inicio - Calcular Costo Total ################## 
@@ -257,7 +256,7 @@ costo_total = costo_total + sum(productos) - M
 print(lista_temp)
 #print(countM)
 print(costo_total)
-################## Inicio - Calcular Costo Total ################## 
+################## Fin - Calcular Costo Total ################## 
 
 
 
