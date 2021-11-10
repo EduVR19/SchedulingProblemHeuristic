@@ -1,22 +1,170 @@
-n_nodos = 11
-M = 50
-T = 300
-C = T - 50
+################## Inicio - Lectura de Datos ################## 
+from os import O_APPEND
+import pandas as pd
+import numpy as np
+import os.path
+import logging
 
-productos = [50, 86, 78, 64, 22, 98, 82, 87, 52, 100, 99]
+# Descomenta una línea con la instancia deseada para correr el programa
+ruta = "Instancia1_10.txt"
+# ruta = "Instancia1_20.txt"
+# ruta = "Instancia1_50a.txt"
+# ruta = "Instancia1_50b.txt"
 
-matrizTiempos = [
-    [0,	8,	15,	7,	16,	15,	9,	14,	20,	14,	9],
-    [7,	0,	14,	17,	19,	17,	14,	14,	14,	18,	8],
-    [9,	11,	0,	16,	6,	14,	15,	5,	10,	11,	18],
-    [13, 18, 6,	0,	14,	18,	7,	19,	12,	10,	14],
-    [20, 19, 6,	17,	0,	11,	12,	6,	11,	14,	7],
-    [13, 15, 7,	16,	16,	0,	13,	5,	11,	18,	14],
-    [20, 11, 16, 6,	15,	10,	0,	12,	9,	14,	13],
-    [5,	15,	12,	5,	5,	18,	17,	0,	12,	7,	15],
-    [5,	11,	8,	13,	19,	17,	19,	20,	0,	18,	15],
-    [7,	6,	14,	14,	19,	9,	9,	7,	16,	0,	7],
-    [6,	11,	9,	18,	17,	20,	9,	15,	18,	20,	0] ]
+# Pregunta el nombre de archivo junto con extensión
+askname_File = ruta
+file_exists = os.path.exists(askname_File)
+
+# Si el archivo existe, entonces lo toma como el
+# que usará para generar los datos
+if file_exists is True:
+    current_Filename = askname_File
+else:
+    print("File not exists!")
+    exit()
+
+
+# Genera los archivos adecuados para el archivo (Instancia1_10.txt)
+if ( current_Filename == 'Instancia1_10.txt'):
+    newTxtGeneral = "Instancia1_10new.txt"
+    valuesNew = "values1_10.txt"
+    productosNew = "productos1_10.txt"
+    arrregloNew = "arreglo1_10.txt"
+    pass
+# Genera los archivos adecuados para el archivo (Instancia1_20.txt)
+elif ( current_Filename == 'Instancia1_20.txt'):
+    newTxtGeneral = "Instancia1_20new.txt"
+    valuesNew = "values1_20.txt"
+    productosNew = "productos1_20.txt"
+    arrregloNew = "arreglo1_20.txt"
+    pass
+# Genera los archivos adecuados para el archivo (Instancia1_50a.txt)
+elif ( current_Filename == 'Instancia1_50a.txt'):
+    newTxtGeneral = "Instancia1_50anew.txt"
+    valuesNew = "values1_50a.txt"
+    productosNew = "productos1_50a.txt"
+    arrregloNew = "arreglo1_50a.txt"
+    pass
+# Genera los archivos adecuados para el archivo (Instancia1_50b.txt)
+elif ( current_Filename == 'Instancia1_50b.txt'):
+    newTxtGeneral = "Instancia1_50bnew.txt"
+    valuesNew = "values1_50b.txt"
+    productosNew = "productos1_50b.txt"
+    arrregloNew = "arreglo1_50b.txt"
+    pass
+else:
+    print("File not supported") # En caso de que no sea alguno de los anteriores
+    exit()                      # entonces termina
+
+
+# Muestra el nombre del archivo con el que trabaja
+print()
+print("Trabajando con: ", current_Filename)
+
+# Abre el archivo actual y genera los nuevos archivos necesarios
+with open(current_Filename) as fin, open(newTxtGeneral, 'w') as fout:
+    for line in fin:
+        fout.write(line.replace('\t', ','))
+
+# Abre tres archivos para guardar cada seccion del txt
+out1 = open(valuesNew, 'w')
+# Archivo para guardar los valores de variables
+out2 = open(productosNew, 'w')
+# Archivo para guardar los productos y sus tiempos
+# de procesamiento
+out3 = open(arrregloNew, 'w')
+# Archivo para guardar la matriz de tiempos de preparación
+with open(newTxtGeneral, 'r') as f:
+    for line in f:
+        if 'Values' in line:
+            for line in f:
+                #print(line)
+                out1.writelines(line)
+                # Genera el archivo 'values.txt y guarda
+                # los valores
+                if not line.strip():
+                    for line in f:
+                        if 'Productos' in line:
+                            for line in f:
+                                out2.writelines(line)
+                                # Genera el archivo 'productos.txt y guarda
+                                # los valores
+                                if not line.strip():
+                                    for line in f:
+                                        if 'Arreglo' in line:
+                                            for line in f:
+                                                out3.writelines(line)
+                                                # Genera el archivo 'arreglo'.txt y guarda
+                                                # los valores
+                                                if not line.strip():
+                                                    break
+out1.close()
+out2.close()
+out3.close()
+# Cierra todos los archivos IMPORTANTE
+
+dataframe1 = pd.read_csv(valuesNew, index_col=None, header=None)
+dataframe1.to_csv('goatValues.csv', index=None)
+# Genera un csv del txt actual con los valores de n, M y T
+
+dataframe2 = pd.read_csv(productosNew, index_col=None, header=None)
+dataframe2.to_csv('goatProducts.csv', index=None)
+# Genera un csv del txt actual con los valores de n, M y T    
+
+dataframe3 = pd.read_csv(arrregloNew, index_col=None, header=None)
+dataframe3.to_csv('goatArreglo.csv', index=None)
+# Genera un csv del txt actual con los valores de n, M y T
+
+values_array = dataframe1.to_numpy()
+productos_array = dataframe2.to_numpy()
+arreglo_array = dataframe3.to_numpy()
+# Transforma cada uno de los dataframes en arreglos
+
+
+lista_final = []
+lista_temp = [0]
+indice_cliente = 0
+tiempo_periodo_temp = 0
+productos = []
+# Listas necesarias para contener datos finales y de control
+
+
+print()
+print("Datos")
+n_nodos = (values_array[0][1] + 1)
+print( "No. de productos: ", (values_array[0][1]) )
+# Muestra la cantidad de nodos
+
+M = (values_array[1][1])
+print( "Tiempo de Mantenimiento M: ", values_array[1][1])
+# Muestra el valor de M
+
+T = (values_array[2][1])
+print("Tiempo de Periodo T: ", values_array[2][1])
+# Muestra el valor de T
+
+C = T - M
+print("Capacidad maxima C: ", C)
+# Capacidad de cada ciclo
+
+# imprimir pruductos
+for x in range(len(productos_array)):
+    productos.append(productos_array[x][1])
+print("Tiempo por producto")
+for i in range( len( productos ) ):
+    print(f"{i + 1} {productos[i]}")
+productos.insert(0, M)
+# Agrega a la lista de productos el arreglo respectivo
+# e inserta al principio el valor de M
+
+matrizTiempos = arreglo_array
+print()
+print("Matriz de Tiempos")
+for i in range( len(productos ) ):
+    print(f"{i} {matrizTiempos[i]}")
+# Simplemente muestra la matriz de tiempos
+################## Fin - Lectura de Datos ################## 
+
 
 
 lista_final = []
