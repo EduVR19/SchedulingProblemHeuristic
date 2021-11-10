@@ -148,6 +148,7 @@ print("Capacidad maxima C: ", C)
 # Capacidad de cada ciclo
 
 # imprimir pruductos
+print()
 for x in range(len(productos_array)):
     productos.append(productos_array[x][1])
 print("Tiempo por producto")
@@ -252,14 +253,16 @@ for nodo in range( len(lista_temp) ):
 costo_total = costo_total + (M * countM)
 
 costo_total = costo_total + sum(productos) - M
-
-print(lista_temp)
-#print(countM)
-print(costo_total)
 ################## Fin - Calcular Costo Total ################## 
 
 
 
 ################## Inicio - Impresion de resultados ################## 
-
+# imprimir matriz
+print()
+print("Resultados")
+print("Secuencia de productos")
+print(lista_temp)
+print("Costo total")
+print(costo_total)
 ################## Fin - Impresion de resultados ################## 
