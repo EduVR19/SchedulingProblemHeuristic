@@ -270,4 +270,7 @@ print(lista_temp)
 print("Tiempo total")
 print(tiempo_total)
 print()
+print("Cantidad de periodos T")
+print(lista_temp.count(0))
+print()
 ################## Fin - Impresion de resultados ################## 
