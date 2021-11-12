@@ -6,10 +6,10 @@ import os.path
 import logging
 
 # Descomenta una línea con la instancia deseada para correr el programa
-ruta = "Instancia1_10.txt"
+# ruta = "Instancia1_10.txt"
 # ruta = "Instancia1_20.txt"
 # ruta = "Instancia1_50a.txt"
-# ruta = "Instancia1_50b.txt"
+ruta = "Instancia1_50b.txt"
 
 # Pregunta el nombre de archivo junto con extensión
 askname_File = ruta
@@ -151,18 +151,28 @@ print("Capacidad maxima C:", C)
 print()
 for x in range(len(productos_array)):
     productos.append(productos_array[x][1])
-print("Tiempo de Preparación por Producto")
-for i in range( len( productos ) ):
-    print(f"{i + 1} {productos[i]}")
 productos.insert(0, M)
+
+print("Tiempo de Preparacion por Producto")
+pd.set_option("max_columns", 10)
+pd.set_option("max_rows", 10)
+print_products = pd.DataFrame(productos)
+print( print_products )
+# for i in range( len( productos ) ):
+#     print(f"{i + 1} {productos[i]}")
+
 # Agrega a la lista de productos el arreglo respectivo
 # e inserta al principio el valor de M
 
 matrizTiempoPreparacion = arreglo_array
 print()
-print("Matriz de Tiempos de Preparación")
-for i in range( len(productos ) ):
-    print(f"{i} {matrizTiempoPreparacion[i]}")
+print("Matriz de Tiempos de Preparacion")
+pd.set_option("max_columns", 9)
+pd.set_option("max_rows", 9)
+print_matriz = pd.DataFrame(matrizTiempoPreparacion)
+print(print_matriz)
+# for i in range( len( matrizTiempoPreparacion[0] ) ):
+#     print(f"{i} {matrizTiempoPreparacion[i]}")
 # Simplemente muestra la matriz de tiempos
 ################## Fin - Lectura de Datos ################## 
 

@@ -1,0 +1,119 @@
+\usepackage[utf8]{inputenc}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{pxfonts}
+\usepackage{wasysym} % symbols
+\usepackage{amssymb} % symbols
+\usepackage{abstract}
+\usepackage{parskip}
+\usepackage{float}
+\PassOptionsToPackage{hyphens}{url}\usepackage[hidelinks]{hyperref}
+\usepackage{tabularx}
+%\def\sym##1{\ifmmode^{##1}\else\(^{##1}\)\fi}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup
+{
+    colorlinks = false,
+    linkbordercolor = {white}, citebordercolor = {white}
+}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{blindtext}% only for dummy text
+\usepackage{fancyhdr}
+\usepackage{titling}
+\usepackage{caption}
+\captionsetup[table]{
+  position=above,
+  justification=raggedright,
+  labelsep=newline, % <<< label and text on different lines
+  singlelinecheck=false % <<< raggadright also when the caption is shorter
+                        % than a single line
+}
+\usepackage[document]{ragged2e}
+\usepackage[affil-sl]{authblk} 
+\usepackage{mathptmx}  %Times new Roman
+
+\setlength{\columnsep}{1cm}
+\renewcommand{\refname}{BIBLIOGRAFÍA}
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\tablename}{Tabla.}
+\renewcommand{\abstractname}{RESUMEN}
+
+% Keywords command
+\providecommand{\keywordsSpan}[1]
+{
+  \small	
+  \textbf{\textit{Palabras Clave:}} #1
+}
+
+\providecommand{\keywordsEng}[1]
+{
+  \small	
+  \textbf{\textit{Keywords:}} #1
+}
+
+
+%%%%%%%% FORMATO DE LAS SECCIONES Y SUBSECCIONES %%%%%
+\titleformat{\section} 
+	{\normalfont\large\bfseries}{\makebox[30pt][l]{\thesection}}{0pt}{} 
+\titleformat{\subsection} 
+	{\normalfont\large\bfseries }{\makebox[30pt][l]{\thesubsection}}{0pt}{}
+\renewcommand\thesection{\arabic{section}.}
+\renewcommand\thesubsection{\thesection\arabic{subsection}}
+%%%%%%%% FORMATO DE LAS SECCIONES Y SUBSECCIONES %%%%%
+
+
+	
+\makeatletter
+\long\def\@makecaption#1#2{
+\vskip\abovecaptionskip
+\sbox\@tempboxa{#1. #2}
+\ifdim \wd\@tempboxa >\hsize
+#1. #2\par
+\else
+\global \@minipagefalse
+\hb@xt@\hsize{\hfil\box\@tempboxa\hfil}
+\fi
+\vskip\belowcaptionskip}
+\makeatother
+
+
+\pagestyle{fancyplain}% <- pagestyle fancyplain
+\fancyfoot[C]{}
+\renewcommand\plainheadrulewidth{.4pt}% headrule on plain pages
+%\fancyhf{}
+\rhead{15 de noviembre del 2021}
+\lhead{ Temas Selectos de Optimización Martes M4-M6 Grupo 001 }
+\rfoot{\thepage}
+
+
+
+
+
+%%%%%% CORRESPONSE AUTHOR %%%%%
+\fancypagestyle{alim}
+{
+\fancyfoot[C]{}
+\renewcommand\plainheadrulewidth{.4pt}% headrule on plain pages
+%\fancyhf{}
+\fancyhf{}\renewcommand{\headrulewidth}{0.4pt}
+% \fancyfoot[R]{
+% \textcolor{gray}{\textbf{How to cite}: Autor uno, Autor dos, Autor tres\\[0.1cm]
+%     Título del artículo en español\\[0.1cm]
+%     Revista EJE, Vol. \# No. \#, p1-pn, 20XX\\[0.1cm]
+%     \textbf{DOI}: http://dx.doi.org/000.000.000
+% }
+% }
+\fancyhead[R]{15 de noviembre del 2021}
+\lhead{Temas Selectos de Optimización Martes M4-M6 Grupo 001 }
+    \renewcommand\plainheadrulewidth{.4pt}% headrule on plain pages
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\date{}
+
+
+
